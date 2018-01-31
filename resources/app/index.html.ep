@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Mneme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <script src="<%= url_for("/jquery/jquery-1.12.4.min.js") %>"></script>
+    <script src="<%= url_for("/bootstrap/js/bootstrap.js") %>"></script>
+
+    <link rel="stylesheet" type="text/css"
+      href="<%= url_for("/bootstrap/css/bootstrap.css") %>" media="all">
+
+    <style type='text/css'>
+      body {
+        text-align: center;
+        font-size: 16px;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container" id="container">
+      <br>
+
+      <div class="row">
+        Placeholder for the Mneme application
+      </div>
+
+    </div>
+
+    <script>
+      var webSocketOne;
+
+      $(document).ready(function() {
+        if (!("WebSocket" in window)) {
+          alert('Your browser does not support WebSockets!');
+          return;
+        }
+
+        $("#input-one").keypress(function(event) {
+          if (event.which == 13) {
+            event.preventDefault();
+            insertOne();
+          }
+        });
+
+        webSocketOne = new WebSocket("<%= url_for('interactive_one')->to_abs->scheme('ws') %>");
+        webSocketOne.onmessage = function (event) {
+          var data = event.data;
+
+        };
+      });
+
+      function insertOne() {
+        var input = $('#input-one');
+        webSocketOne.send(input.val());
+        input.val('');
+      }
+    </script>
+  </body>
+</html>

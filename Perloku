@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./mneme daemon --listen http://*:$PORT
