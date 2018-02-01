@@ -6,6 +6,7 @@ Patientia tua in studiis meis computatoriis auxilium meum maximum!
 ## Perl
 http://mojolicious.org/perldoc/Mojolicious/Guides/Rendering  
 http://mojolicious.org/perldoc/Mojolicious/Controller#url_for  
+http://mojolicious.org/perldoc/Mojolicious/Command/daemon  
 
 http://blogs.perl.org/users/joel_berger/2012/10/a-websocket-mojoliciousdbi-example.html  
 http://blogs.perl.org/users/revlin_john/2013/03/re-simple-webserver---serve-static-files-with-mojolicious.html  
