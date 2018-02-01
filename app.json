@@ -1,0 +1,9 @@
+{
+  "name": "Mneme",
+  "description": "Mojolicious application for easy memorization of historical facts",
+  "keywords": [
+    "perl5",
+    "Mojolicious"
+  ],
+  "repository": "https://github.com/ddmitov/mneme"
+}
