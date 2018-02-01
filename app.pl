@@ -29,7 +29,7 @@ use Mojolicious::Lite;
 # unshift @{app->static->paths}, $app_folder;
 
 # BASE ROUTE HANDLER
-any '/' => sub {
+get '/' => sub {
   my $self = shift;
   $self->render('index');
 };
@@ -53,10 +53,7 @@ websocket '/interactive_one' => sub {
 };
 
 # SERVER STARTER:
-my $daemon = Mojo::Server::Daemon->new(app => app);
-$daemon->start;
-
-Mojo::IOLoop->start unless Mojo::IOLoop->is_running;
+app->start;
 
 __DATA__
 
