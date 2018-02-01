@@ -11,16 +11,12 @@ use utf8;
 # CORE MODULES:
 use Encode qw(decode);
 use File::Spec::Functions qw(catdir);
-use FindBin qw($Bin);
-
-# Use CPAN modules installed by Carton:
-use lib catdir($Bin, "local", "lib", "perl5");
 
 # CPAN MODULES:
 use Mojolicious::Lite;
 
 # APPLICATION FOLDER:
-my $app_folder = catdir($Bin, 'resources', 'app');
+my $app_folder = catdir($ENV{PWD}, 'resources', 'app');
 
 # CUSTOM PATHS
 # Template path:
@@ -29,7 +25,7 @@ unshift @{app->renderer->paths}, $app_folder;
 unshift @{app->static->paths}, $app_folder;
 
 # BASE ROUTE HANDLER
-any '/' => sub {
+get '/' => sub {
   my $self = shift;
   $self->render('index');
 };
@@ -53,9 +49,6 @@ websocket '/interactive_one' => sub {
 };
 
 # SERVER STARTER:
-my $daemon = Mojo::Server::Daemon->new(app => app);
-$daemon->start;
-
-Mojo::IOLoop->start unless Mojo::IOLoop->is_running;
+app->start;
 
 __DATA__

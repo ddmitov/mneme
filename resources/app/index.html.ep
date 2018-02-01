@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
-    <script src="<%= url_for("/jquery/jquery-1.12.4.min.js") %>"></script>
-    <script src="<%= url_for("/bootstrap/js/bootstrap.js") %>"></script>
+    <script src="<%= url_for("/jquery/jquery-1.12.4.min.js")->to_abs->scheme('https') %>"></script>
+    <script src="<%= url_for("/bootstrap/js/bootstrap.js")->to_abs->scheme('https') %>"></script>
 
     <link rel="stylesheet" type="text/css"
-      href="<%= url_for("/bootstrap/css/bootstrap.css") %>" media="all">
+      href="<%= url_for("/bootstrap/css/bootstrap.css")->to_abs->scheme('https') %>" media="all">
 
     <style type='text/css'>
       body {
@@ -26,7 +26,8 @@
       <br>
 
       <div class="row">
-        Placeholder for the Mneme application
+        Placeholder for the Mneme application:<br>
+        Mojolicious application for easy memorization of historical facts
       </div>
 
     </div>
