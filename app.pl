@@ -59,3 +59,15 @@ $daemon->start;
 Mojo::IOLoop->start unless Mojo::IOLoop->is_running;
 
 __DATA__
+
+@@ index.html.ep
+% layout 'default';
+% title 'Welcome';
+Welcome to the Mojolicious real-time web framework!
+
+@@ layouts/default.html.ep
+<!DOCTYPE html>
+<html>
+  <head><title><%= title %></title></head>
+  <body><%= content %></body>
+</html>
