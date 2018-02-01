@@ -10,23 +10,19 @@ use utf8;
 
 # CORE MODULES:
 use Encode qw(decode);
-# use File::Spec::Functions qw(catdir);
-# use FindBin qw($Bin);
-
-# Use CPAN modules installed by Carton:
-# use lib catdir($Bin, "local", "lib", "perl5");
+use File::Spec::Functions qw(catdir);
 
 # CPAN MODULES:
 use Mojolicious::Lite;
 
 # APPLICATION FOLDER:
-# my $app_folder = catdir($Bin, 'resources', 'app');
+my $app_folder = catdir($ENV{PWD}, 'resources', 'app');
 
 # CUSTOM PATHS
 # Template path:
-# unshift @{app->renderer->paths}, $app_folder;
+unshift @{app->renderer->paths}, $app_folder;
 # Static files path:
-# unshift @{app->static->paths}, $app_folder;
+unshift @{app->static->paths}, $app_folder;
 
 # BASE ROUTE HANDLER
 get '/' => sub {
@@ -59,8 +55,8 @@ __DATA__
 
 @@ index.html.ep
 % layout 'default';
-% title 'Welcome';
-Welcome to the Mojolicious real-time web framework!
+% title 'Mneme';
+Placeholder for Mneme - Mojolicious application for easy memorization of historical facts
 
 @@ layouts/default.html.ep
 <!DOCTYPE html>
