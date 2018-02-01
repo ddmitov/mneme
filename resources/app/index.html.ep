@@ -26,7 +26,7 @@
       <br>
 
       <div class="row">
-        Placeholder for the Mneme application:<br>
+        Placeholder for Mneme:<br>
         Mojolicious application for easy memorization of historical facts
       </div>
 
@@ -48,7 +48,7 @@
           }
         });
 
-        webSocketOne = new WebSocket("<%= url_for('interactive_one')->to_abs->scheme('ws') %>");
+        webSocketOne = new WebSocket("<%= url_for('interactive_one')->to_abs->scheme('wss') %>");
         webSocketOne.onmessage = function (event) {
           var data = event.data;
 
