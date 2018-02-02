@@ -5,10 +5,11 @@ use warnings;
 use utf8;
 
 # CORE MODULES:
-use Encode qw(decode);
+use Encode;
 use File::Spec::Functions qw(catdir);
 
 # CPAN MODULES:
+use JSON::PP;
 use Mojolicious::Lite;
 
 # APPLICATION FOLDER:
@@ -20,26 +21,51 @@ unshift @{app->renderer->paths}, $app_folder;
 # Static files path:
 unshift @{app->static->paths}, $app_folder;
 
+# GET JSON DATA:
+my $raw_json_data = do {
+  local $/; <main::DATA>
+};
+
+my $json_object = new JSON::PP;
+my $questions_object =
+  $json_object->JSON::PP::decode(Encode::encode('UTF-8', $raw_json_data));
+my @questions = @{$questions_object->{'questions'}};
+
 # BASE ROUTE HANDLER
 get '/' => sub {
-  my $self = shift;
-  $self->render('index');
+  my $web_connection = shift;
+  $web_connection->render('index');
 };
 
 # WEBSOCKET HANDLER:
-websocket '/interactive_one' => sub {
-  my $self = shift;
+websocket '/data' => sub {
+  my $websocket = shift;
 
-  # $self->send(decode('UTF-8', $data));
+  # No websocket timeout:
+  my $loop = Mojo::IOLoop->singleton;
+  $loop->stream($websocket->tx->connection)->timeout(0);
 
-  # Handle websocket requests:
-  $self->on(
+  $websocket->on(
     message => sub {
       my ($websocket, $websocket_request) = @_;
 
-      # if ($websocket_request =~ '_select_') {
-      #
-      # }
+      if ($websocket_request =~ 'get_question_') {
+        my $question_number = $websocket_request =~ s/get_question_//;
+        $websocket->send(
+          Encode::decode('UTF-8', $questions[$question_number]->{"question"}));
+      }
+
+      if ($websocket_request =~ 'get_variants_') {
+        my $question_number = $websocket_request =~ s/get_variants_//;
+        $websocket->send(
+          Encode::decode('UTF-8', $questions[$question_number]->{"variants"}));
+      }
+
+      if ($websocket_request =~ 'get_answer_') {
+        my $question_number = $websocket_request =~ s/get_answer_//;
+        $websocket->send(
+          Encode::decode('UTF-8', $questions[$question_number]->{"answer"}));
+      }
     }
   );
 };
@@ -48,3 +74,31 @@ websocket '/interactive_one' => sub {
 app->start;
 
 __DATA__
+{
+  "questions" : [
+    {
+      "date" : "1408",
+      "type" : "closed",
+      "question" : "Въстанието на Константин и Фружин избухва в началото на:",
+      "variants" : {
+        "1":"XIV в.",
+        "2":"XV в.",
+        "3":"XVI в.",
+        "4":"XVII в."
+      },
+      "answer" : "XV в."
+    },
+    {
+      "date" : "1598",
+      "type" : "closed",
+      "question" : "Първото Търновско въстание започва в:",
+      "variants" : {
+        "1":"1598 г.",
+        "2":"1686 г.",
+        "3":"1688 г.",
+        "4":"1689 г."
+      },
+      "answer" : "1598 г."
+    }
+  ]
+}

@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
-    <script src="<%= url_for("/jquery/jquery-1.12.4.min.js")->to_abs->scheme('https') %>"></script>
-    <script src="<%= url_for("/bootstrap/js/bootstrap.js")->to_abs->scheme('https') %>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css"
-      href="<%= url_for("/bootstrap/css/bootstrap.css")->to_abs->scheme('https') %>" media="all">
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="all">
 
     <style type='text/css'>
       body {
@@ -22,14 +22,32 @@
   </head>
 
   <body>
-    <div class="container" id="container">
+    <div class="container">
       <br>
 
-      <div class="row">
-        Placeholder for Mneme:<br>
-        Mojolicious application for easy memorization of historical facts
+      <div class="row justify-content-center">
+        Mneme:<br>
+        Bulgarian Mojolicious application for easy memorization of historical facts<br>
+        UNDER CONSTRUCTION
       </div>
 
+      <br>
+
+      <div class="row justify-content-center">
+        <a title="Derivative work by users: Srhat, Flamurai, Dsmurat. LGPL (http://www.gnu.org/licenses/lgpl.html)],
+          via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3AUnder_construction_icon-green.svg">
+          <img width="512" alt="Under construction icon-green"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Under_construction_icon-green.svg/512px-Under_construction_icon-green.svg.png"/>
+        </a>
+      </div>
+
+      <br>
+
+      <div class="row justify-content-center" id="question">
+        <div class="btn btn-primary" onclick="javascript:getFirstQuestion();">
+          Започни
+        </div>
+      </div>
     </div>
 
     <script>
@@ -41,24 +59,16 @@
           return;
         }
 
-        $("#input-one").keypress(function(event) {
-          if (event.which == 13) {
-            event.preventDefault();
-            insertOne();
-          }
-        });
+        webSocketConnection = new WebSocket("<%= url_for('data')->to_abs->scheme('wss') %>");
 
-        webSocketOne = new WebSocket("<%= url_for('interactive_one')->to_abs->scheme('wss') %>");
-        webSocketOne.onmessage = function (event) {
+        webSocketConnection.onmessage = function (event) {
           var data = event.data;
-
+          $('#question').html(data);
         };
       });
 
-      function insertOne() {
-        var input = $('#input-one');
-        webSocketOne.send(input.val());
-        input.val('');
+      function getFirstQuestion() {
+        webSocketConnection.send("get_question_1");
       }
     </script>
   </body>

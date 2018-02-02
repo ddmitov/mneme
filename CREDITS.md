@@ -13,13 +13,12 @@ http://blogs.perl.org/users/revlin_john/2013/03/re-simple-webserver---serve-stat
 
 http://www.perlmonks.org/?node_id=1130920 (Mojolicious Websocket example)  
 http://www.perlmonks.org/?node_id=1070002 (Mojolicious websocket with server-side repeating events)  
-http://www.perlmonks.org/?node_id=1130920 (Mojolicious Websocket example)  
-http://www.perlmonks.org/?node_id=37237 (Find perl module version from command-line)  
+http://www.perlmonks.org/?node_id=992521 (JSON::XS and unicode)  
 
-https://github.com/kraih/mojo/wiki/Apache-deployment#apachemod_perl-psgiplack  
 https://github.com/reyiyo/mojolicious_template  
 
-https://alvinalexander.com/blog/post/perl/how-to-traverse-loop-items-elements-perl-hash  
+## Bootstrap
+https://v4-alpha.getbootstrap.com/utilities/flexbox/  
 
-## JavaScript
-http://adripofjavascript.com/blog/drips/determining-if-a-string-contains-another-string-in-javascript-three-approaches.html  
+## Under Construction Icon
+https://commons.wikimedia.org/wiki/File%3AUnder_construction_icon-green.svg  

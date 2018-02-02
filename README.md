@@ -5,7 +5,8 @@ Mneme
 Mneme is a Mojolicious application for easy memorization of historical facts.  
 It is intended to run on the Heroku platform and is still in an early stage of development.  
 
-## CPAN Dependency
+## CPAN Dependencies
+* ``JSON::PP``  
 * ``Mojolicious::Lite``  
 
 ## [Thanks and Credits](./CREDITS.md)
