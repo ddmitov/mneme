@@ -24,19 +24,14 @@ unshift @{app->static->paths}, $app_folder;
 
 my $data_folder = catdir($resources_folder, 'data');
 
-# GET JSON DATA FROM THE __DATA__ SECTION OF THIS FILE:
-# my $raw_json_data = do {
-#   local $/; <main::DATA>
-# };
-
 # GET JSON DATA FROM EXTERNAL FILE:
 my $file = catdir($data_folder, 'questions.json');
 my $raw_json_data;
 {
-    open my $filehandle, '<', $file or die;
-    local $/ = undef;
-    $raw_json_data = <$filehandle>;
-    close $filehandle;
+  open my $filehandle, '<', $file or die;
+  local $/ = undef;
+  $raw_json_data = <$filehandle>;
+  close $filehandle;
 }
 
 my $json_object = new JSON::PP;

@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="all">
 
+    <script src="<%= url_for("mneme.js")->to_abs->scheme('https') %>"></script>
+
     <style type='text/css'>
       body {
         text-align: center;
@@ -26,24 +28,25 @@
       <br>
 
       <div class="row justify-content-center">
-        Mneme:<br>
-        Bulgarian Mojolicious application for easy memorization of historical facts<br>
-        UNDER CONSTRUCTION
-      </div>
-
-      <br>
-
-      <div class="row justify-content-center">
-        <a title="Derivative work by users: Srhat, Flamurai, Dsmurat. LGPL (http://www.gnu.org/licenses/lgpl.html)],
-          via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3AUnder_construction_icon-green.svg">
-          <img width="512" alt="Under construction icon-green"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Under_construction_icon-green.svg/512px-Under_construction_icon-green.svg.png"/>
-        </a>
+        MNEME<br>
+        лесно запомняне на<br>
+        основни факти от българската история<br>
+        В ПРОЦЕС НА РАЗРАБОТКА
       </div>
 
       <br>
 
       <div class="row justify-content-center" id="question">
+        <a title="See page for author [Public domain], via Wikimedia Commons"
+          href="https://commons.wikimedia.org/wiki/File%3ACoat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg">
+          <img width="256" alt="Coat of Arms of Bulgaria XVII century, Insignia procerum"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg/256px-Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg"/>
+        </a>
+      </div>
+
+      <br>
+
+      <div class="row justify-content-center" id="button">
         <div class="btn btn-primary" onclick="javascript:getFirstQuestion();">
           Започни
         </div>
@@ -51,7 +54,7 @@
     </div>
 
     <script>
-      var webSocketOne;
+      var webSocketConnection;
 
       $(document).ready(function() {
         if (!("WebSocket" in window)) {
@@ -66,10 +69,6 @@
           $('#question').html(data);
         };
       });
-
-      function getFirstQuestion() {
-        webSocketConnection.send("get_question_1");
-      }
     </script>
   </body>
 </html>

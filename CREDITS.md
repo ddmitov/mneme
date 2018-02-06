@@ -17,12 +17,14 @@ http://www.perlmonks.org/?node_id=992521 (JSON::XS and unicode)
 
 https://github.com/reyiyo/mojolicious_template  
 
+https://perlmaven.com/slurp  
+
 http://xmodulo.com/how-to-parse-json-string-in-perl.html  
 
 https://stackoverflow.com/questions/8258387/accessing-values-of-json-structure-in-perl  
 
 ## Bootstrap
-https://v4-alpha.getbootstrap.com/utilities/flexbox/  
+https://getbootstrap.com/docs/4.0/utilities/flex/  
 
-## Under Construction Icon
-https://commons.wikimedia.org/wiki/File%3AUnder_construction_icon-green.svg  
+## Welcome Image
+https://commons.wikimedia.org/wiki/File%3ACoat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg  
