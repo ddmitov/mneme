@@ -59,7 +59,7 @@
           return;
         }
 
-        webSocketConnection = new WebSocket("<%= url_for('data')->to_abs->scheme('wss') %>");
+        webSocketConnection = new WebSocket("<%= url_for('data')->to_abs->scheme('ws') %>");
 
         webSocketConnection.onmessage = function (event) {
           var data = event.data;

@@ -13,7 +13,8 @@ use JSON::PP;
 use Mojolicious::Lite;
 
 # APPLICATION FOLDER:
-my $resources_folder = catdir($ENV{PWD}, 'resources');
+# my $resources_folder = catdir($ENV{PWD}, 'resources');
+my $resources_folder = catdir('/home/dimitar/github/mneme', 'resources');
 
 my $app_folder = catdir($resources_folder, 'app');
 my $data_folder = catdir($resources_folder, 'data');
