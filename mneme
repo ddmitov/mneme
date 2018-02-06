@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use utf8;
+use open ':std', ':encoding(UTF-8)';
 
 # CORE MODULES:
 use Encode;
@@ -12,18 +13,16 @@ use File::Spec::Functions qw(catdir);
 use JSON::PP;
 use Mojolicious::Lite;
 
-# APPLICATION FOLDER:
-# my $resources_folder = catdir($ENV{PWD}, 'resources');
-my $resources_folder = catdir('/home/dimitar/github/mneme', 'resources');
+# CUSTOM APPLICATION PATHS:
+my $resources_folder = catdir($ENV{PWD}, 'resources');
 
 my $app_folder = catdir($resources_folder, 'app');
-my $data_folder = catdir($resources_folder, 'data');
-
-# CUSTOM PATHS
-# Template path:
+# Templates path:
 unshift @{app->renderer->paths}, $app_folder;
 # Static files path:
 unshift @{app->static->paths}, $app_folder;
+
+my $data_folder = catdir($resources_folder, 'data');
 
 # GET JSON DATA FROM THE __DATA__ SECTION OF THIS FILE:
 # my $raw_json_data = do {
