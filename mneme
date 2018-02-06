@@ -13,7 +13,10 @@ use JSON::PP;
 use Mojolicious::Lite;
 
 # APPLICATION FOLDER:
-my $app_folder = catdir($ENV{PWD}, 'resources', 'app');
+my $resources_folder = catdir($ENV{PWD}, 'resources');
+
+my $app_folder = catdir($resources_folder, 'app');
+my $data_folder = catdir($resources_folder, 'data');
 
 # CUSTOM PATHS
 # Template path:
@@ -21,14 +24,25 @@ unshift @{app->renderer->paths}, $app_folder;
 # Static files path:
 unshift @{app->static->paths}, $app_folder;
 
-# GET JSON DATA:
-my $raw_json_data = do {
-  local $/; <main::DATA>
-};
+# GET JSON DATA FROM THE __DATA__ SECTION OF THIS FILE:
+# my $raw_json_data = do {
+#   local $/; <main::DATA>
+# };
+
+# GET JSON DATA FROM EXTERNAL FILE:
+my $file = catdir($data_folder, 'questions.json');
+my $raw_json_data;
+{
+    open my $filehandle, '<', $file or die;
+    local $/ = undef;
+    $raw_json_data = <$filehandle>;
+    close $filehandle;
+}
 
 my $json_object = new JSON::PP;
 my $questions_object =
   $json_object->JSON::PP::decode(Encode::encode('UTF-8', $raw_json_data));
+
 my @questions = @{$questions_object->{'questions'}};
 
 # BASE ROUTE HANDLER
@@ -72,33 +86,3 @@ websocket '/data' => sub {
 
 # SERVER STARTER:
 app->start;
-
-__DATA__
-{
-  "questions" : [
-    {
-      "date" : "1408",
-      "type" : "closed",
-      "question" : "Въстанието на Константин и Фружин избухва в началото на:",
-      "variants" : {
-        "1":"XIV в.",
-        "2":"XV в.",
-        "3":"XVI в.",
-        "4":"XVII в."
-      },
-      "answer" : "XV в."
-    },
-    {
-      "date" : "1598",
-      "type" : "closed",
-      "question" : "Първото Търновско въстание започва в:",
-      "variants" : {
-        "1":"1598 г.",
-        "2":"1686 г.",
-        "3":"1688 г.",
-        "4":"1689 г."
-      },
-      "answer" : "1598 г."
-    }
-  ]
-}

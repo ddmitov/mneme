@@ -17,6 +17,10 @@ http://www.perlmonks.org/?node_id=992521 (JSON::XS and unicode)
 
 https://github.com/reyiyo/mojolicious_template  
 
+http://xmodulo.com/how-to-parse-json-string-in-perl.html  
+
+https://stackoverflow.com/questions/8258387/accessing-values-of-json-structure-in-perl  
+
 ## Bootstrap
 https://v4-alpha.getbootstrap.com/utilities/flexbox/  
 
