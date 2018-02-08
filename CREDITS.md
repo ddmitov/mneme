@@ -22,6 +22,7 @@ https://perlmaven.com/slurp
 http://xmodulo.com/how-to-parse-json-string-in-perl.html  
 
 https://stackoverflow.com/questions/8258387/accessing-values-of-json-structure-in-perl  
+https://stackoverflow.com/questions/8463919/how-to-convert-a-simple-hash-to-json-in-perl  
 
 ## Bootstrap
 https://getbootstrap.com/docs/4.0/utilities/flex/  
