@@ -27,7 +27,7 @@
     <div class="container">
       <br>
 
-      <div class="row center-block">
+      <div class="row justify-content-center">
         <a href="https://en.wikipedia.org/wiki/Mneme">Mneme</a>
       </div>
 
