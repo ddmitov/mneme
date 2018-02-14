@@ -39,22 +39,26 @@
 
       <br>
 
-      <div class="row justify-content-center" id="question">
-        <a title="See page for author [Public domain], via Wikimedia Commons"
-          href="https://commons.wikimedia.org/wiki/File%3ACoat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg">
-          <img width="256" alt="Coat of Arms of Bulgaria XVII century, Insignia procerum"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg/256px-Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg"/>
-        </a>
-      </div>
+      <div id="question">
+        <div class="row justify-content-center">
+          <a title="See page for author [Public domain], via Wikimedia Commons"
+            href="https://commons.wikimedia.org/wiki/File%3ACoat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg">
+            <img width="256" alt="Coat of Arms of Bulgaria XVII century, Insignia procerum"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg/256px-Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg"/>
+          </a>
+        </div>
 
-      <br>
+        <br>
 
-      <div class="row justify-content-center" id="button">
-        <div class="btn btn-primary" onclick="javascript:getFirstQuestion();">
-          Започни
+        <div class="row justify-content-center">
+          <div class="btn btn-primary" onclick="javascript:getFirstQuestion();">
+            Започни
+          </div>
         </div>
       </div>
     </div>
+
+    <br>
 
     <script>
       var webSocketConnection;
@@ -68,8 +72,23 @@
         webSocketConnection = new WebSocket("<%= url_for('data')->to_abs->scheme('wss') %>");
 
         webSocketConnection.onmessage = function (event) {
-          var data = event.data;
-          $('#question').html(data);
+          var questionObject = JSON.parse(event.data);
+
+          var question = questionObject.question;
+          var variety = questionObject.class;
+
+          var variantOne = questionObject.a;
+          var variantTwo = questionObject.b;
+          var variantThree = questionObject.c;
+          var variantFour = questionObject.d;
+
+          $('#question').html(
+            question + "<br>" +
+            variantOne + "<br>" +
+            variantTwo + "<br>" +
+            variantThree + "<br>" +
+            variantFour + "<br>"
+          );
         };
       });
     </script>
