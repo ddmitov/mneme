@@ -39,47 +39,39 @@ my $questions_object =
 
 my @questions = @{$questions_object->{'questions'}};
 
-# BASE ROUTE HANDLER:
+# ROUTE HANDLER:
 get '/' => sub {
-  my $web_connection = shift;
-  $web_connection->render('index');
+  my $page_handler = shift;
+  $page_handler->render('index');
 };
 
-# WEBSOCKET HANDLER:
-websocket '/data' => sub {
-  my $websocket = shift;
+get '/get_question' => sub {
+  my $page_handler = shift;
+  my $question_number = $page_handler->param('number');
 
-  # No websocket timeout:
-  my $loop = Mojo::IOLoop->singleton;
-  $loop->stream($websocket->tx->connection)->timeout(0);
-
-  $websocket->on(
-    message => sub {
-      my ($websocket, $websocket_request) = @_;
-
-      if ($websocket_request =~ 'get_question_') {
-        my $question_number = $websocket_request =~ s/get_question_//;
-
-        my %response_hash = (
-          "question" => Encode::decode('UTF-8', $questions[$question_number]->{"question"}),
-          "class" => Encode::decode('UTF-8', $questions[$question_number]->{"class"}),
-          "a" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"a"}),
-          "b" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"b"}),
-          "c" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"c"}),
-          "d" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"d"}),
-        );
-
-        my $response_json = encode_json \%response_hash;
-        $websocket->send(Encode::decode('UTF-8', $response_json));
-      }
-
-      if ($websocket_request =~ 'check_answer_') {
-        my $question_number = $websocket_request =~ s/check_answer_//;
-        $websocket->send(
-          Encode::decode('UTF-8', $questions[$question_number]->{"answer"}));
-      }
-    }
+  my %response_hash = (
+    "question" => Encode::decode('UTF-8', $questions[$question_number]->{"question"}),
+    "class" => Encode::decode('UTF-8', $questions[$question_number]->{"class"}),
+    "a" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"a"}),
+    "b" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"b"}),
+    "c" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"c"}),
+    "d" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"d"}),
   );
+
+  my $response_json = encode_json \%response_hash;
+  $page_handler->render(text => Encode::decode('UTF-8', $response_json));
+};
+
+get '/check_answer' => sub {
+  my $page_handler = shift;
+  my $question_number = $page_handler->param('number');
+
+  my %response_hash = (
+    "answer" => Encode::decode('UTF-8', $questions[$question_number]->{"answer"}),
+  );
+
+  my $response_json = encode_json \%response_hash;
+  $page_handler->render(text => Encode::decode('UTF-8', $response_json));
 };
 
 # SERVER STARTER:
