@@ -20,6 +20,8 @@ https://stackoverflow.com/questions/8258387/accessing-values-of-json-structure-i
 https://stackoverflow.com/questions/8463919/how-to-convert-a-simple-hash-to-json-in-perl  
 
 https://github.com/reyiyo/mojolicious_template  
+https://gist.github.com/diegok/1561712  
+
 https://perlmaven.com/slurp  
 http://xmodulo.com/how-to-parse-json-string-in-perl.html  
 

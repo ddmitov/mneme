@@ -59,7 +59,10 @@ get '/get_question' => sub {
   );
 
   my $response_json = encode_json \%response_hash;
-  $page_handler->render(text => Encode::decode('UTF-8', $response_json));
+  $page_handler->render(
+    text => Encode::decode('UTF-8', $response_json),
+    status => 200, format => 'json'
+  );
 };
 
 get '/check_answer' => sub {
@@ -71,7 +74,10 @@ get '/check_answer' => sub {
   );
 
   my $response_json = encode_json \%response_hash;
-  $page_handler->render(text => Encode::decode('UTF-8', $response_json));
+  $page_handler->render(
+    text => Encode::decode('UTF-8', $response_json),
+    status => 200, format => 'json'
+  );
 };
 
 # SERVER STARTER:
