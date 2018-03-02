@@ -27,22 +27,16 @@
 
   <body>
     <div class="container">
-      <br>
-
-      <div class="row justify-content-center">
-        <h2>
-          <a href="https://en.wikipedia.org/wiki/Mneme">Mneme</a>
-        </h2>
+      <div class="page-header">
+        <h1><a href="https://en.wikipedia.org/wiki/Mneme">Mneme</a></h1>
       </div>
 
       <div class="row justify-content-center">
-        <h4>
+        <p>
           бърз преговор на основни факти от българската история<br>
           (в процес на разработка)
-        </h4>
+        </p>
       </div>
-
-      <br>
 
       <div id="question">
         <div class="row justify-content-center">
