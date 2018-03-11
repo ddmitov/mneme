@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use utf8;
+use feature ':5.10';
 use open ':std', ':encoding(UTF-8)';
 
 # CORE MODULES:
@@ -14,8 +15,7 @@ use JSON::PP;
 use Mojolicious::Lite;
 
 # CUSTOM APPLICATION PATHS:
-# my $resources_folder = catdir($ENV{PWD}, 'resources');
-my $resources_folder = catdir('/home/dimitar/github/mneme', 'resources');
+my $resources_folder = catdir($ENV{PWD}, 'resources');
 my $app_folder = catdir($resources_folder, 'app');
 my $data_folder = catdir($resources_folder, 'data');
 
