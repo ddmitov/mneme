@@ -48,30 +48,46 @@ get '/' => sub {
 
 get '/get_question' => sub {
   my $page_handler = shift;
-  my $question_number = $page_handler->param('number');
 
-  my %response_hash = (
-    "question" => Encode::decode('UTF-8', $questions[$question_number]->{"question"}),
-    "class" => Encode::decode('UTF-8', $questions[$question_number]->{"class"}),
-    "1" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"1"}),
-    "2" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"2"}),
-    "3" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"3"}),
-    "4" => Encode::decode('UTF-8', $questions[$question_number]->{"variants"}->{"4"}),
-  );
+  my $question_number = "";
+  $question_number = $page_handler->param('number');
 
-  my $response_json = encode_json \%response_hash;
-  $page_handler->render(
-    text => Encode::decode('UTF-8', $response_json),
-    status => 200, format => 'json'
-  );
+  if ($question_number <= scalar @questions) {
+    my $index_number = $question_number - 1;
+
+    my %response_hash = (
+      "number" => $question_number,
+      "question" => Encode::decode('UTF-8', $questions[$index_number]->{"question"}),
+      "1" => Encode::decode('UTF-8', $questions[$index_number]->{"variants"}->{"1"}),
+      "2" => Encode::decode('UTF-8', $questions[$index_number]->{"variants"}->{"2"}),
+      "3" => Encode::decode('UTF-8', $questions[$index_number]->{"variants"}->{"3"}),
+      "4" => Encode::decode('UTF-8', $questions[$index_number]->{"variants"}->{"4"}),
+    );
+
+    my $response_json = encode_json \%response_hash;
+    $page_handler->render(
+      text => Encode::decode('UTF-8', $response_json),
+      status => 200, format => 'json'
+    );
+  }
+
+  if ($question_number > scalar @questions) {
+    $page_handler->render(
+      text => "",
+      status => 200, format => 'json'
+    );
+  }
 };
 
 get '/check_answer' => sub {
   my $page_handler = shift;
-  my $question_number = $page_handler->param('number');
+
+  my $question_number = "";
+  $question_number = $page_handler->param('number');
+  my $index_number = $question_number - 1;
 
   my %response_hash = (
-    "answer" => Encode::decode('UTF-8', $questions[$question_number]->{"answer"}),
+    "answer" => Encode::decode('UTF-8', $questions[$index_number]->{"answer"}),
   );
 
   my $response_json = encode_json \%response_hash;

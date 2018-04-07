@@ -19,8 +19,18 @@
     <style type='text/css'>
       body {
         text-align: center;
-        font-size: 20px;
         font-family: sans-serif;
+      }
+
+      .page-header {
+        margin-top: 8px;
+      }
+
+      .row {
+        margin-left: 8px;
+        margin-top: 8px;
+        margin-right: 8px;
+        margin-bottom: 8px;
       }
     </style>
   </head>
@@ -32,10 +42,11 @@
       </div>
 
       <div class="row justify-content-center">
-        <p>
-          бърз преговор на основни факти от българската история<br>
-          (в процес на разработка)
-        </p>
+        <h4>
+          бърз преговор на основни факти от българската история
+          <br>
+          <i>в процес на разработка</i>
+        </h4>
       </div>
 
       <div id="question">
@@ -46,30 +57,40 @@
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg/256px-Coat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg"/>
           </a>
         </div>
+      </div>
 
-        <br>
-
+      <div id="buttons">
         <div class="row justify-content-center">
-          <div class="btn btn-primary" onclick="javascript:getFirstQuestion();">
+          <div class="btn btn-primary" onclick="javascript:getNextQuestion();">
             Започни
           </div>
         </div>
       </div>
     </div>
 
-    <br>
-
     <script>
-      function getFirstQuestion() {
+      function getNextQuestion() {
+        var questionForm = document.querySelector('form[name=question]');
+        var nextQuestionNumber;
+        if (questionForm === null) {
+          nextQuestionNumber = 1;
+        } else {
+          nextQuestionNumber = parseInt(questionForm.id) + 1;
+        }
+
         $.ajax({
-          url: "<%= url_for('get_question')->to_abs->scheme('https') %>",
+          url: '/get_question',
           dataType: 'text',
-          data: {"number":"1"},
+          data: {'number': nextQuestionNumber},
           cache: false,
-          type: "GET",
+          type: 'GET',
           success: function(data) {
-            var questionObject = JSON.parse(data);
-            insertQuestion(questionObject);
+            if (data.length > 0) {
+              insertQuestion(JSON.parse(data));
+              console.log('Question Nr.: ' + nextQuestionNumber);
+            } else {
+              console.log('No more questions.');
+            }
           }
         });
       }

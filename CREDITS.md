@@ -34,9 +34,13 @@ https://www.quackit.com/bootstrap/bootstrap_4/tutorial/bootstrap_cards.cfm
 https://bootsnipp.com/snippets/featured/simple-css-custom-checkboxes-and-radios  
 https://www.w3schools.com/bootstrap/bootstrap_jumbotron_header.asp  
 
-## jQuery
+## JavaScript & jQuery
 http://api.jquery.com/append/  
 https://api.jquery.com/empty/  
+
+https://www.w3schools.com/jsref/prop_radio_checked.asp  
+https://www.w3schools.com/jsref/jsref_parseint.asp  
+https://www.w3schools.com/jsref/jsref_length_string.asp  
 https://www.w3schools.com/jquery/ajax_get.asp  
 
 ## Welcome Image
