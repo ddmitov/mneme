@@ -10,7 +10,7 @@ http://mojolicious.org/perldoc/Mojolicious/Command/daemon
 http://mojolicious.org/perldoc/Mojo/Message/Request  
 
 http://blogs.perl.org/users/joel_berger/2012/10/a-websocket-mojoliciousdbi-example.html  
-http://blogs.perl.org/users/revlin_john/2013/03/re-simple-webserver---serve-static-files-with-mojolicious.html  
+http://blogs.perl.org/users/joel_berger/2013/01/a-quick-static-file-webserver.html  
 
 http://www.perlmonks.org/?node_id=1130920 (Mojolicious Websocket example)  
 http://www.perlmonks.org/?node_id=1070002 (Mojolicious websocket with server-side repeating events)  

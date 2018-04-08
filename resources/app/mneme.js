@@ -1,3 +1,29 @@
+function getNextQuestion() {
+  var questionForm = document.querySelector('form[name=question]');
+  var nextQuestionNumber;
+  if (questionForm === null) {
+    nextQuestionNumber = 1;
+  } else {
+    nextQuestionNumber = parseInt(questionForm.id) + 1;
+  }
+
+  $.ajax({
+    url: '/get_question',
+    dataType: 'text',
+    data: {'number': nextQuestionNumber},
+    cache: false,
+    type: 'GET',
+    success: function(data) {
+      if (data.length > 0) {
+        insertQuestion(JSON.parse(data));
+        console.log('Question Nr.: ' + nextQuestionNumber);
+      } else {
+        console.log('No more questions.');
+      }
+    }
+  });
+}
+
 function insertQuestion(questionObject) {
   var formElement = document.createElement('form');
   formElement.setAttribute('name', 'question');

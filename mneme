@@ -19,8 +19,6 @@ my $resources_folder = catdir($ENV{PWD}, 'resources');
 my $app_folder = catdir($resources_folder, 'app');
 my $data_folder = catdir($resources_folder, 'data');
 
-# Templates path:
-unshift @{app->renderer->paths}, $app_folder;
 # Static files path:
 unshift @{app->static->paths}, $app_folder;
 
@@ -43,7 +41,7 @@ my @questions = @{$questions_object->{'questions'}};
 # ROUTE HANDLER:
 get '/' => sub {
   my $page_handler = shift;
-  $page_handler->render('index');
+  $page_handler->reply->static('index.html');
 };
 
 get '/get_question' => sub {

@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
-    <script src="<%= url_for("mneme.js")->to_abs->scheme('https') %>"></script>
-    <link rel="stylesheet" type="text/css"
-      href="<%= url_for("mneme.css")->to_abs->scheme('https') %>" media="all">
+    <script src="/mneme.js"></script>
+    <link rel="stylesheet" type="text/css" href="/mneme.css" media="all">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
@@ -67,33 +66,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      function getNextQuestion() {
-        var questionForm = document.querySelector('form[name=question]');
-        var nextQuestionNumber;
-        if (questionForm === null) {
-          nextQuestionNumber = 1;
-        } else {
-          nextQuestionNumber = parseInt(questionForm.id) + 1;
-        }
-
-        $.ajax({
-          url: '/get_question',
-          dataType: 'text',
-          data: {'number': nextQuestionNumber},
-          cache: false,
-          type: 'GET',
-          success: function(data) {
-            if (data.length > 0) {
-              insertQuestion(JSON.parse(data));
-              console.log('Question Nr.: ' + nextQuestionNumber);
-            } else {
-              console.log('No more questions.');
-            }
-          }
-        });
-      }
-    </script>
   </body>
 </html>
