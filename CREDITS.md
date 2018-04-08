@@ -30,18 +30,24 @@ https://stackoverflow.com/questions/3216512/how-can-i-create-mutually-exclusive-
 
 ## Bootstrap
 https://getbootstrap.com/docs/4.0/utilities/flex/  
+https://getbootstrap.com/docs/4.0/utilities/colors/  
+https://getbootstrap.com/docs/4.0/utilities/borders/  
 https://www.quackit.com/bootstrap/bootstrap_4/tutorial/bootstrap_cards.cfm  
 https://bootsnipp.com/snippets/featured/simple-css-custom-checkboxes-and-radios  
 https://www.w3schools.com/bootstrap/bootstrap_jumbotron_header.asp  
 
-## JavaScript & jQuery
+## JavaScript
 http://api.jquery.com/append/  
 https://api.jquery.com/empty/  
 
 https://www.w3schools.com/jsref/prop_radio_checked.asp  
 https://www.w3schools.com/jsref/jsref_parseint.asp  
 https://www.w3schools.com/jsref/jsref_length_string.asp  
+https://www.w3schools.com/jsref/prop_radio_disabled.asp  
 https://www.w3schools.com/jquery/ajax_get.asp  
+
+https://stackoverflow.com/questions/2117538/how-to-uncheck-a-radio-button  
+https://stackoverflow.com/questions/13245672/how-to-disable-the-radio-button-using-javascript-not-using-any-js-framework  
 
 ## Welcome Image
 https://commons.wikimedia.org/wiki/File%3ACoat_of_Arms_of_Bulgaria_XVII_century%2C_Insignia_procerum.jpg  

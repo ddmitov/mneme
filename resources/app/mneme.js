@@ -61,6 +61,7 @@ function insertQuestion(questionObject) {
 
   var checkAnswerRow = document.createElement('div');
   checkAnswerRow.setAttribute('class', 'row justify-content-center');
+  checkAnswerRow.setAttribute('id', 'check-answer-element');
   var checkAnswerButton = document.createElement('div');
   checkAnswerButton.setAttribute('class', 'btn btn-primary');
   checkAnswerButton.setAttribute('onclick', 'javascript:checkAnswer();');
@@ -86,6 +87,7 @@ function createRow(questionObject, questionNumber) {
 
   var label = document.createElement('label');
   label.setAttribute('class', 'label-text');
+  label.setAttribute('id', 'question-' + questionNumber);
 
   var radio = document.createElement('input');
   radio.setAttribute('type', 'radio');
@@ -113,32 +115,35 @@ function checkAnswer() {
     if (radioButtonsArray[index].checked === true) {
       selectedAnswer = radioButtonsArray[index].id;
     }
+
+    radioButtonsArray[index].checked = false;
+    radioButtonsArray[index].disabled = true;
   }
 
-  if (selectedAnswer !== undefined) {
-    var questionForm = document.querySelector('form[name=question]');
-    var questionNumber = questionForm.id;
+  var questionForm = document.querySelector('form[name=question]');
+  var questionNumber = questionForm.id;
 
-    $.ajax({
-      url: '/check_answer',
-      dataType: 'text',
-      data: {'number': questionNumber},
-      cache: false,
-      type: 'GET',
-      success: function(data) {
-        var questionObject = JSON.parse(data);
-        var correctAnswer = questionObject.answer;
+  $.ajax({
+    url: '/check_answer',
+    dataType: 'text',
+    data: {'number': questionNumber},
+    cache: false,
+    type: 'GET',
+    success: function(data) {
+      var questionObject = JSON.parse(data);
+      var correctAnswer = questionObject.answer;
 
-        if (selectedAnswer === correctAnswer) {
-          console.log('Correct answer: ' + selectedAnswer);
-        } else {
-          console.log('Wrong answer: ' + selectedAnswer);
-        }
+      if (selectedAnswer !== undefined && selectedAnswer !== correctAnswer) {
+        var selectedAnswerText =
+          document.getElementById('question-' + selectedAnswer);
+        selectedAnswerText.setAttribute('class', 'text-white bg-danger rounded ml-10 mr-10');
       }
-    });
-  }
 
-  if (selectedAnswer === undefined) {
-    console.log('No answer is selected.');
-  }
+      var correctAnswerText =
+        document.getElementById('question-' + correctAnswer);
+      correctAnswerText.setAttribute('class', 'text-white bg-success rounded ml-10 mr-10');
+
+      $('#check-answer-element').empty();
+    }
+  });
 }
