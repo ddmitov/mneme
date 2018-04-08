@@ -1,6 +1,7 @@
 function getNextQuestion() {
   var questionForm = document.querySelector('form[name=question]');
   var nextQuestionNumber;
+
   if (questionForm === null) {
     nextQuestionNumber = 1;
   } else {
@@ -16,9 +17,15 @@ function getNextQuestion() {
     success: function(data) {
       if (data.length > 0) {
         insertQuestion(JSON.parse(data));
-        console.log('Question Nr.: ' + nextQuestionNumber);
       } else {
-        console.log('No more questions.');
+        $('#next-question-row').empty();
+
+        var noMoreQuestionMessage = document.createElement('p');
+        noMoreQuestionMessage.setAttribute('class', 'label-text text-white bg-danger rounded');
+        noMoreQuestionMessage.setAttribute('style', 'padding: 10px;');
+        noMoreQuestionMessage.innerHTML = 'Въпросите са изчерпани!';
+
+        $('#next-question-row').append(noMoreQuestionMessage);
       }
     }
   });
@@ -60,8 +67,8 @@ function insertQuestion(questionObject) {
   $('#question').append(formElement);
 
   var checkAnswerRow = document.createElement('div');
+  checkAnswerRow.setAttribute('id', 'check-answer-row');
   checkAnswerRow.setAttribute('class', 'row justify-content-center');
-  checkAnswerRow.setAttribute('id', 'check-answer-element');
   var checkAnswerButton = document.createElement('div');
   checkAnswerButton.setAttribute('class', 'btn btn-primary');
   checkAnswerButton.setAttribute('onclick', 'javascript:checkAnswer();');
@@ -69,6 +76,7 @@ function insertQuestion(questionObject) {
   checkAnswerRow.appendChild(checkAnswerButton);
 
   var nextQuestionRow = document.createElement('div');
+  nextQuestionRow.setAttribute('id', 'next-question-row');
   nextQuestionRow.setAttribute('class', 'row justify-content-center');
   var nextQuestionButton = document.createElement('div');
   nextQuestionButton.setAttribute('class', 'btn btn-primary');
@@ -96,6 +104,7 @@ function createRow(questionObject, questionNumber) {
 
   var span = document.createElement('span');
   span.setAttribute('class', 'label-text');
+  span.setAttribute('style', 'padding: 10px;');
   span.innerHTML = ' ' + questionObject[questionNumber];
 
   label.appendChild(radio);
@@ -136,14 +145,14 @@ function checkAnswer() {
       if (selectedAnswer !== undefined && selectedAnswer !== correctAnswer) {
         var selectedAnswerText =
           document.getElementById('question-' + selectedAnswer);
-        selectedAnswerText.setAttribute('class', 'text-white bg-danger rounded ml-10 mr-10');
+        selectedAnswerText.setAttribute('class', 'text-white bg-danger rounded');
       }
 
       var correctAnswerText =
         document.getElementById('question-' + correctAnswer);
-      correctAnswerText.setAttribute('class', 'text-white bg-success rounded ml-10 mr-10');
+      correctAnswerText.setAttribute('class', 'text-white bg-success rounded');
 
-      $('#check-answer-element').empty();
+      $('#check-answer-row').remove();
     }
   });
 }

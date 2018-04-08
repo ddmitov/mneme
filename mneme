@@ -70,10 +70,7 @@ get '/get_question' => sub {
   }
 
   if ($question_number > scalar @questions) {
-    $page_handler->render(
-      text => "",
-      status => 200, format => 'json'
-    );
+    $page_handler->render(text => "");
   }
 };
 
