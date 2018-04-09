@@ -70,8 +70,12 @@ get '/get_question' => sub {
   }
 
   if ($question_number > scalar @questions) {
-    $page_handler->render(text => "");
+    $page_handler->render(text => "", status => 200);
   }
+
+  # print "Number of questions: ";
+  # print scalar @questions;
+  # print "\n";
 };
 
 get '/check_answer' => sub {
@@ -82,7 +86,8 @@ get '/check_answer' => sub {
   my $index_number = $question_number - 1;
 
   my %response_hash = (
-    "answer" => Encode::decode('UTF-8', $questions[$index_number]->{"answer"}),
+    "answer" =>
+      Encode::decode('UTF-8', $questions[$index_number]->{"variants"}{"correct"}),
   );
 
   my $response_json = encode_json \%response_hash;
