@@ -32,6 +32,10 @@ https://stackoverflow.com/questions/3216512/how-can-i-create-mutually-exclusive-
 https://getbootstrap.com/docs/4.0/utilities/flex/  
 https://getbootstrap.com/docs/4.0/utilities/colors/  
 https://getbootstrap.com/docs/4.0/utilities/borders/  
+
+https://bootswatch.com/united/  
+https://www.bootstrapcdn.com/  
+
 https://www.quackit.com/bootstrap/bootstrap_4/tutorial/bootstrap_cards.cfm  
 https://bootsnipp.com/snippets/featured/simple-css-custom-checkboxes-and-radios  
 https://www.w3schools.com/bootstrap/bootstrap_jumbotron_header.asp  
