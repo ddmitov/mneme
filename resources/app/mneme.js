@@ -1,3 +1,6 @@
+var correctAnswersGlobalNumber = 0;
+var wrongAnswersGlobalNumber = 0;
+
 function getNextQuestion() {
   var questionForm = document.querySelector('form[name=question]');
   var nextQuestionNumber;
@@ -84,9 +87,15 @@ function insertQuestion(questionObject) {
   nextQuestionButton.innerHTML = 'Следващ';
   nextQuestionRow.appendChild(nextQuestionButton);
 
+  var answersStatistics = document.createElement('div');
+  answersStatistics.setAttribute('id', 'answers-statistics');
+  answersStatistics.setAttribute('class', 'row justify-content-center');
+  answersStatistics.innerHTML = getAnswerStatistics();
+
   $('#buttons').empty();
   $('#buttons').append(checkAnswerRow);
   $('#buttons').append(nextQuestionRow);
+  $('#buttons').append(answersStatistics);
 }
 
 function createRow(questionObject, questionNumber) {
@@ -146,6 +155,18 @@ function checkAnswer() {
         var selectedAnswerText =
           document.getElementById('question-' + selectedAnswer);
         selectedAnswerText.setAttribute('class', 'text-white bg-danger rounded');
+
+        wrongAnswersGlobalNumber++;
+        var answersStatisticsText = getAnswerStatistics();
+        var answersStatisticsElement = document.getElementById('answers-statistics');
+        answersStatisticsElement.innerHTML = answersStatisticsText;
+      }
+
+      if (selectedAnswer !== undefined && selectedAnswer === correctAnswer) {
+        correctAnswersGlobalNumber++;
+        var answersStatisticsText = getAnswerStatistics();
+        var answersStatisticsElement = document.getElementById('answers-statistics');
+        answersStatisticsElement.innerHTML = answersStatisticsText;
       }
 
       var correctAnswerText =
@@ -155,4 +176,46 @@ function checkAnswer() {
       $('#check-answer-row').remove();
     }
   });
+}
+
+function getAnswerStatistics() {
+  var correctAnswersNumber = correctAnswersGlobalNumber;
+  var wrongAnswersNumber = wrongAnswersGlobalNumber;
+  var correctAnswersLabel;
+  var wrongAnswersLabel;
+  var divisor = ' / ';
+
+  if (correctAnswersNumber == 0) {
+    correctAnswersNumber = '';
+    correctAnswersLabel = '';
+    divisor = '';
+  }
+
+  if (wrongAnswersNumber == 0) {
+    wrongAnswersNumber = '';
+    wrongAnswersLabel = '';
+    divisor = '';
+  }
+
+  if (correctAnswersNumber == 1) {
+    correctAnswersLabel = ' верен';
+  }
+
+  if (correctAnswersNumber > 1) {
+    correctAnswersLabel = ' верни';
+  }
+
+  if (wrongAnswersNumber == 1) {
+    wrongAnswersLabel = ' грешен';
+  }
+
+  if (wrongAnswersNumber > 1) {
+    wrongAnswersLabel = ' грешни';
+  }
+
+  var text =
+    correctAnswersNumber + correctAnswersLabel + divisor +
+    wrongAnswersNumber + wrongAnswersLabel;
+
+  return text;
 }
