@@ -72,10 +72,6 @@ get '/get_question' => sub {
   if ($question_number > scalar @questions) {
     $page_handler->render(text => "", status => 200);
   }
-
-  # print "Number of questions: ";
-  # print scalar @questions;
-  # print "\n";
 };
 
 get '/check_answer' => sub {
