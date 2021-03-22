@@ -1,7 +1,6 @@
 # Mneme
 
 [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](./LICENSE.md)
-[![Heroku](https://heroku-badge.herokuapp.com/?app=mneme)](https://mneme.herokuapp.com/)
 
 Mneme е Perl 5 Mojolicious уеб приложение за бърз преговор на основни факти от българската история.  
 То работи на платформата Heroku.  
