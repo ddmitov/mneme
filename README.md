@@ -3,10 +3,10 @@
 [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](./LICENSE.md)
 
 Mneme е Perl 5 Mojolicious уеб приложение за бърз преговор на основни факти от българската история.  
-То работи на платформата Heroku.  
+То работеше на платформата Heroku.  
 
 Mneme is a Perl 5 Mojolicious application for a quick review of basic facts of Bulgarian history.  
-It runs on the Heroku platform.  
+It was running on the Heroku platform.  
 
 ## CPAN Dependencies
 
